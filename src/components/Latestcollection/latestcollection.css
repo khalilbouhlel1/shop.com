@@ -1,0 +1,177 @@
+.latestcollection {
+  padding: 60px 8%;
+  background-color: #f8f8f8;
+  overflow: hidden;
+}
+
+.collection-header {
+  text-align: center;
+  margin-bottom: 50px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.collection-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.collection-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.scroll-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 20px 0;
+}
+
+.scroll-content {
+  display: flex;
+  gap: 30px;
+  animation: scrollLeft 40s linear infinite;
+  /* Ensure enough width for smooth scrolling */
+  width: max-content;
+}
+
+.scroll-content:hover {
+  animation-play-state: paused;
+}
+
+.collection-item {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  width: 300px; /* Fixed width for each item */
+  flex-shrink: 0; /* Prevent items from shrinking */
+}
+
+.collection-item:hover {
+  transform: translateY(-10px);
+}
+
+.item-image {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.collection-item:hover .item-image img {
+  transform: scale(1.1);
+}
+
+.item-overlay {
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  transition: bottom 0.3s ease;
+  display: flex;
+  justify-content: center;
+}
+
+.collection-item:hover .item-overlay {
+  bottom: 0;
+}
+
+.add-to-cart {
+  padding: 10px 25px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.add-to-cart:hover {
+  background-color: #444;
+  transform: translateY(-2px);
+}
+
+.item-details {
+  padding: 20px;
+}
+
+.item-details h3 {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 8px;
+  text-decoration: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+@keyframes scrollLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .scroll-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .latestcollection {
+    padding: 40px 5%;
+  }
+
+  .collection-header h1 {
+    font-size: 2rem;
+  }
+
+  .scroll-content {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
+
+  .item-details h3 {
+    font-size: 0.9rem;
+  }
+
+  .price {
+    font-size: 1.1rem;
+  }
+}

@@ -1,0 +1,375 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 30px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo img {
+  max-height: 40px;
+  width: auto;
+}
+
+.navbar-search input {
+  padding: 8px 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  width: 300px;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.navbar-search input:focus {
+  border-color: #666;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-links ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links li {
+  cursor: pointer;
+  position: relative;
+  color: #333;
+  font-weight: 500;
+}
+
+.navbar-links li:hover {
+  color: #666;
+}
+
+.navbar-links li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.navbar-links li:hover a {
+  color: #666;
+}
+
+/* Dropdown styles */
+.categories-dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  background-color: white;
+  min-width: 180px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 8px 0;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform-origin: top center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%) translateY(-10px);
+}
+
+/* Arrow pointer for dropdown */
+.dropdown-content::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.04);
+}
+
+.categories-dropdown:hover .dropdown-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 12px 20px;
+  text-decoration: none;
+  display: block;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.dropdown-content a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #333;
+  transition: width 0.2s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #f8f8f8;
+  padding-left: 24px; /* Slight indent on hover */
+}
+
+.dropdown-content a:hover::after {
+  width: 20px; /* Line width on hover */
+}
+
+/* Add separator between items */
+.dropdown-content a:not(:last-child) {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.nav-login-cart {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Cart icon container */
+.cart-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 1001;
+  cursor: pointer;
+}
+
+.nav-login-cart svg {
+  font-size: 22px;
+  color: #333;
+  cursor: pointer;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #bf0000;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Mobile menu icon */
+.mobile-menu-icon {
+  position: relative;
+  z-index: 1001;
+  background: none;
+  border: none;
+  padding: 0;
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1024px) {
+  .navbar-search input {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    padding: 12px 20px;
+  }
+
+  .mobile-menu-icon {
+    display: block;
+    z-index: 100;
+  }
+
+  .navbar-search {
+    order: 1;
+    width: 100%;
+    margin: 10px 0;
+    display: none; /* Hide search on mobile by default */
+  }
+
+  .navbar-search input {
+    width: 100%;
+  }
+
+  .navbar-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background-color: white;
+    padding: 80px 20px;
+    transition: 0.3s ease-in-out;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    overflow-y: auto;
+  }
+
+  .navbar-links.active {
+    right: 0;
+  }
+
+  .navbar-links ul {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .navbar-links li a {
+    font-size: 16px;
+    padding: 8px 0;
+    display: block;
+  }
+
+  /* Remove dropdown styles for mobile */
+  .dropdown-content {
+    display: none;
+  }
+
+  .nav-login-cart {
+    position: fixed;
+    bottom: 20px;
+    right: -100%;
+    width: 70%;
+    padding: 20px;
+    background-color: white;
+    transition: 0.3s ease-in-out;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .nav-login-cart.active {
+    right: 0;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Ensure cart link is clickable in mobile */
+  .cart-icon-container {
+    position: relative;
+    z-index: 1002;
+  }
+
+  .cart-count {
+    top: -6px;
+    right: -6px;
+  }
+
+  .mobile-only {
+    display: block;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar-logo img {
+    max-height: 35px;
+  }
+
+  .navbar-links {
+    width: 85%;
+  }
+
+  .nav-login-cart {
+    width: 85%;
+  }
+
+  .nav-login-cart button {
+    padding: 8px 20px;
+    font-size: 14px;
+  }
+}
+
+.nav-login-cart button {
+  padding: 10px 25px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.nav-login-cart button:hover {
+  background-color: #444;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-login-cart button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: block;
+}
+
+.login-button button {
+  background: none;
+  border: 2px solid #333;
+  padding: 8px 20px;
+  border-radius: 20px;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-button button:hover {
+  background: #333;
+  color: white;
+}
+
+.login-button {
+  text-decoration: none;
+}
+
+/* Add overlay when menu is open */
+.navbar::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease-in-out;
+  z-index: 999;
+}
+
+.navbar.menu-open::after {
+  opacity: 1;
+  visibility: visible;
+}
