@@ -62,23 +62,6 @@
   margin-bottom: 20px;
 }
 
-.remember-me {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #666;
-}
-
-.forgot-password {
-  color: #333;
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-
-.forgot-password:hover {
-  text-decoration: underline;
-}
-
 .signin-button {
   width: 100%;
   padding: 12px;
@@ -96,73 +79,6 @@
   transform: translateY(-2px);
 }
 
-.divider {
-  text-align: center;
-  margin: 20px 0;
-  position: relative;
-}
-
-.divider::before,
-.divider::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 45%;
-  height: 1px;
-  background-color: #ddd;
-}
-
-.divider::before {
-  left: 0;
-}
-
-.divider::after {
-  right: 0;
-}
-
-.divider span {
-  background-color: white;
-  padding: 0 10px;
-  color: #666;
-  font-size: 0.9rem;
-}
-
-.google-login {
-  width: 100%;
-  padding: 12px;
-  background-color: white;
-  color: #333;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.google-login:hover {
-  background-color: #f5f5f5;
-}
-
-.register-link {
-  text-align: center;
-  margin-top: 20px;
-  color: #666;
-}
-
-.register-link a {
-  color: #333;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.register-link a:hover {
-  text-decoration: underline;
-}
-
 @media screen and (max-width: 480px) {
   .login-box {
     padding: 30px 20px;
@@ -171,4 +87,14 @@
   .login-box h2 {
     font-size: 1.8rem;
   }
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 0.9rem;
 }

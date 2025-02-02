@@ -1,9 +1,27 @@
-import React from 'react'
+import {React,useState} from 'react'
 import './footer.css'
 import { FaFacebook, FaTwitter, FaInstagram, FaYoutube,FaTiktok, FaWhatsapp } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-
+import axios from 'axios'
 const Footer = () => {
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:7000/api/subscription/subscribe', { email });
+      setMessage(response.data.message);
+      setEmail('');
+    } catch (error) {
+      console.error('Subscription error:', error);
+      if (error.code === 'ERR_NETWORK') {
+        setMessage('Unable to connect to server. Please try again later.');
+      } else {
+        setMessage(error.response?.data?.message || 'Something went wrong');
+      }
+    }
+  };
   return (
     <footer className='footer'>
       <div className='footer-content'>
@@ -49,10 +67,23 @@ const Footer = () => {
           </div>
           <div className='newsletter'>
             <h4>Subscribe to our newsletter</h4>
-            <div className='newsletter-input'>
-              <input type="email" placeholder="Your email address" />
-              <button>Subscribe</button>
-            </div>
+            <form onSubmit={handleSubmit} className='newsletter-input'>
+              <input 
+                type="email" 
+                placeholder="Your email address" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <button type="submit">
+                Subscribe
+              </button>
+            </form>
+            {message && (
+              <div className={`message ${message.includes('error') ? 'error' : 'success'}`}>
+                {message}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -64,6 +95,7 @@ const Footer = () => {
             <Link to="/privacy-policy">Privacy Policy</Link>
             <Link to="/terms">Terms & Conditions</Link>
             <Link to="/sitemap">Sitemap</Link>
+            <Link to="/Dashboard">Admin</Link>
           </div>
         </div>
       </div>

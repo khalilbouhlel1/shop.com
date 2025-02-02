@@ -74,9 +74,6 @@ const Navbar = () => {
       </div>
 
       <div className={`nav-login-cart ${isMenuOpen ? 'active' : ''}`}>
-        <Link to="/login" className="login-button" onClick={handleLinkClick}>
-          <button>Login</button>
-        </Link>
         <Link to="/cart" className="cart-icon-container" onClick={handleLinkClick}>
           <FaShoppingCart />
           <div className='cart-count'>

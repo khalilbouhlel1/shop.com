@@ -1,31 +1,56 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
+import axios from 'axios'
 import './login.css'
 
 const Login = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
+  const [error, setError] = useState('')
 
   const handleChange = (e) => {
+    setError('') // Clear error when user types
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Handle login logic here
-    console.log('Login data:', formData)
+    try {
+      const response = await axios.post('http://localhost:7000/api/auth/login', formData)
+      const { token, user } = response.data
+      
+      localStorage.setItem('token', token)
+      localStorage.setItem('user', JSON.stringify(user))
+      
+      // Set authorization header
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      
+      // Check if user is admin before redirecting
+      if (user.id === 'admin') {
+        navigate('/dashboard')
+      } else {
+        setError('Not authorized as admin')
+      }
+    } catch (error) {
+      setError(error.response?.data?.message || 'Login failed')
+      setFormData({ ...formData, password: '' })
+    }
   }
 
   return (
     <div className='login-container'>
       <div className='login-box'>
-        <h2>Welcome Back</h2>
-        <p className='subtitle'>Please enter your details</p>
+        <h2>Admin Login</h2>
+        <p className='subtitle'>Please enter your credentials</p>
+        
+        {error && <div className='error-message'>{error}</div>}
         
         <form onSubmit={handleSubmit}>
           <div className='form-group'>
@@ -53,33 +78,10 @@ const Login = () => {
               required
             />
           </div>
-
-          <div className='form-options'>
-            <label className='remember-me'>
-              <input type="checkbox" /> Remember me
-            </label>
-            <Link to="/forgot-password" className='forgot-password'>
-              Forgot password?
-            </Link>
-          </div>
-
           <button type="submit" className='signin-button'>
             Sign In
           </button>
         </form>
-
-        <div className='divider'>
-          <span>OR</span>
-        </div>
-
-        <button className='google-login'>
-          Sign in with Google
-        </button>
-
-        <p className='register-link'>
-          Don't have an account? {' '}
-          <Link to="/register">Sign up</Link>
-        </p>
       </div>
     </div>
   )
